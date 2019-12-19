@@ -3,12 +3,12 @@ package com.example.navdrawer;
 public class Player {
     //TODO: add image player face (image) attribute to this class
     private String Name, Type;
-    private Long Price, Rating;
+    private int Price, Rating;
 
     public Player() {
     }
 
-    public Player(String name, String type, Long price, Long rating) {
+    public Player(String name, String type, int price, int rating) {
         Name = name;
         Type = type;
         Price = price;
@@ -31,19 +31,19 @@ public class Player {
         Type = type;
     }
 
-    public Long getPrice() {
+    public int getPrice() {
         return Price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(int price) {
         Price = price;
     }
 
-    public Long getRating() {
+    public int getRating() {
         return Rating;
     }
 
-    public void setRating(Long rating) {
+    public void setRating(int rating) {
         Rating = rating;
     }
 }
