@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Admin extends AppCompatActivity {
 
-    EditText keys, budget1, price1;
+    EditText keys, budget1, price1,roomkey;
     public int key;
     private Button button,apply;
     private RadioGroup radioGroup;
@@ -32,7 +32,7 @@ public class Admin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-
+        roomkey = findViewById(R.id.roomkey);
         button=findViewById(R.id.change);
         keys=findViewById(R.id.keys);
         apply=findViewById(R.id.apply);
@@ -58,8 +58,9 @@ public class Admin extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         key=Integer.parseInt(keys.getText().toString());
+                        String roomKey = roomkey.getText().toString();
                         display();
-                        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Key");
+                        DatabaseReference reference= FirebaseDatabase.getInstance().getReference(roomKey);
                         reference.setValue(key);
                     }
                 }

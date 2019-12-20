@@ -1,6 +1,8 @@
 package com.example.navdrawer;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,10 @@ public class DashboardFragment extends Fragment {
         Price=view.findViewById(R.id.Price);
         Rating=view.findViewById(R.id.Rating);
 
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Key");
+        String roomkey = getActivity().getIntent().getStringExtra("RoomKey");
+
+
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child(roomkey);
         reference.addValueEventListener(
                 new ValueEventListener() {
                     @Override
@@ -59,7 +64,7 @@ public class DashboardFragment extends Fragment {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Player player_class=dataSnapshot.getValue(Player.class);
+                        Player player_class = dataSnapshot.getValue(Player.class);
                         Name.setText(player_class.getName());
                         Price.setText(Integer.toString(player_class.getPrice()));
                         Rating.setText(Integer.toString(player_class.getRating()));
