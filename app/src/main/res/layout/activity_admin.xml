@@ -9,93 +9,95 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="room1key"
-            android:textSize="40sp"
-            android:layout_marginTop="20dp"
-            android:id="@+id/roomkey"/>
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:id="@+id/roomkey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="4"
-            android:textSize="40sp"
             android:layout_marginTop="20dp"
-            android:id="@+id/keys"/>
+            android:text="room1key"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <EditText
+            android:id="@+id/keys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="4"
+            android:textAlignment="center"
+            android:textSize="40sp" />
 
         <Button
+            android:id="@+id/change_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Change Value"
-            android:id="@+id/change" />
+            android:text="Change Value" />
 
         <RadioGroup
             android:id="@+id/radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp">
 
             <RadioButton
                 android:id="@+id/A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="A"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="B"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="C"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/Unsold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Unsold Player"
-                android:textSize="20sp"/>
-
+                android:textSize="20sp" />
 
 
         </RadioGroup>
 
         <Button
-            android:id="@+id/apply"
+            android:id="@+id/apply_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="20sp"
-            android:text="Apply"/>
+            android:text="Apply"
+            android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/team_budget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/budget"
-            android:textSize="40sp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:hint="Team budget"
+            android:textSize="40sp" />
 
         <EditText
+            android:id="@+id/player_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/price"
-            android:textSize="40sp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:hint="Player cost"
+            android:textSize="40sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

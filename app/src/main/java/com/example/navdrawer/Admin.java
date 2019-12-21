@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,45 +20,38 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+interface FirebaseCallback {
+    void OnCallback(int value);
+}
+
 public class Admin extends AppCompatActivity {
 
-    EditText keys, budget1, price1,roomkey;
+    EditText keys, team_budget, player_price, roomkey;
     public int key;
-    private Button button,apply;
+    private Button change_btn, apply_btn;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private int budget,final_price,d;
+    String assign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         roomkey = findViewById(R.id.roomkey);
-        button=findViewById(R.id.change);
+        change_btn =findViewById(R.id.change_btn);
         keys=findViewById(R.id.keys);
-        apply=findViewById(R.id.apply);
+        apply_btn =findViewById(R.id.apply_btn);
         radioGroup=findViewById(R.id.radio_group);
-        budget1=findViewById(R.id.budget);
-        price1=findViewById(R.id.price);
+        team_budget =findViewById(R.id.team_budget);
+        player_price =findViewById(R.id.player_price);
 
-        apply.setOnClickListener(
+
+        change_btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int radioId=radioGroup.getCheckedRadioButtonId();
-                        radioButton=findViewById(radioId);
-                        String assign=radioButton.getText().toString();
-                        assign_player(assign);
-                        change_budget(assign);
-                    }
-                }
-        );
-
-        button.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        key=Integer.parseInt(keys.getText().toString());
+                        key = Integer.parseInt(keys.getText().toString());
                         String roomKey = roomkey.getText().toString();
                         display();
                         DatabaseReference reference= FirebaseDatabase.getInstance().getReference(roomKey);
@@ -65,32 +59,51 @@ public class Admin extends AppCompatActivity {
                     }
                 }
         );
-    }
 
-    private void change_budget(String a) {
-        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Teams").child(a).child("Budget");
-        databaseReference.addValueEventListener(
-                new ValueEventListener() {
+        apply_btn.setOnClickListener(
+                new View.OnClickListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        budget=dataSnapshot.getValue(Integer.class);
-                        budget1.setText(Integer.toString(budget));
-                        //Toast.makeText(Admin.this, "Budget is: "+budget, Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    public void onClick(View v) {
+                        int radioId = radioGroup.getCheckedRadioButtonId();
+                        radioButton = findViewById(radioId);
+                        assign = radioButton.getText().toString();
+                        assign_player();
+                        change_budget();
                     }
                 }
         );
-        DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference("Players").child(Integer.toString(key)).child("Price");
+    }
+
+    private void change_budget() {
+        /*DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference("Players").child(Integer.toString(key)).child("price");
         databaseReference1.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        d=dataSnapshot.getValue(Integer.class);
-                        price1.setText(Integer.toString(d));
+                        d = dataSnapshot.getValue(Integer.class);
+                        Log.d("NavDrawer", Integer.toString(d));
+                        player_price.setText(Integer.toString(d));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );*/
+
+        if(player_price.getText() != null)
+            d = Integer.parseInt(player_price.getText().toString());
+
+        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Teams").child(assign).child("Budget");
+        databaseReference.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        budget = dataSnapshot.getValue(Integer.class);
+                        Log.d("NavDrawer budget", Integer.toString(budget));
+                        team_budget.setText(Integer.toString(budget));
+                        databaseReference.setValue(budget-d);
                     }
 
                     @Override
@@ -99,20 +112,16 @@ public class Admin extends AppCompatActivity {
                     }
                 }
         );
-        String c=budget1.getText().toString();
-        //int m=Integer.parseInt(price1.getText().toString());
-        Toast.makeText(this, "Price is : "+c, Toast.LENGTH_SHORT).show();
     }
 
-    private void assign_player(String assign) {
-        final String a = assign;
+    private void assign_player() {
         final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Teams").child(assign);
         DatabaseReference databaseReference3 = FirebaseDatabase.getInstance().getReference("Players").child(Integer.toString(key));
         databaseReference3.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        final Player player_class = dataSnapshot.getValue(Player.class);
+                        Player player_class = dataSnapshot.getValue(Player.class);
                         databaseReference1.child("Players").child(Integer.toString(key)).setValue(player_class).addOnCompleteListener(
                                 new OnCompleteListener<Void>() {
                                     @Override
