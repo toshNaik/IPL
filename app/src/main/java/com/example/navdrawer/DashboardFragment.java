@@ -1,11 +1,14 @@
 package com.example.navdrawer;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +27,9 @@ public class DashboardFragment extends Fragment {
 
     int key=1;
     TextView ID,Name,Price,Rating;
+    private AnimationDrawable animationDrawable;
+    ImageView playerback;
+    private LinearLayout linearLayout;
 
     @Nullable
     @Override
@@ -33,6 +40,12 @@ public class DashboardFragment extends Fragment {
         Name=view.findViewById(R.id.Name);
         Price=view.findViewById(R.id.Price);
         Rating=view.findViewById(R.id.Rating);
+        linearLayout = view.findViewById(R.id.linearl);
+        playerback = view.findViewById(R.id.backimg);
+        animationDrawable = (AnimationDrawable)linearLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
 
         String roomkey = getActivity().getIntent().getStringExtra("RoomKey");
 
@@ -68,6 +81,8 @@ public class DashboardFragment extends Fragment {
                         Name.setText(player_class.getName());
                         Price.setText(Integer.toString(player_class.getPrice()));
                         Rating.setText(Integer.toString(player_class.getRating()));
+                        Glide.with(getContext()).load(player_class.getImageUri()).circleCrop().into(playerback);
+
                     }
 
                     @Override

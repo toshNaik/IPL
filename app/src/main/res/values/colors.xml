@@ -3,4 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="clickEffect">#FFFDFD</color>
+    <color name="Black">#000000</color>
+    <color name="Green">#01AF07</color>
+    <color name="colorStart">#02837A</color>
+    <color name="colorCenter">#7A1CB9</color>
+    <color name="colorStop">#1856F0</color>
 </resources>

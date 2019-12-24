@@ -2,14 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical"
+        android:id="@+id/linearl"
+        android:background="@drawable/gradient_animation"
         android:paddingTop="10dp">
+
 
         <TextView
             android:layout_width="match_parent"
@@ -17,7 +22,9 @@
             android:layout_marginTop="20dp"
             android:textSize="40sp"
             android:textAlignment="center"
-            android:text="Display Current Player"
+            android:textColor="#FFF"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="IPL AUCTION 2K20"
             />
 
         <TextView
@@ -29,32 +36,95 @@
             android:textAlignment="center"
             android:layout_marginTop="30dp"/>
 
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/circle"
+            android:layout_gravity="center"
+            android:id="@+id/backimg"
+            />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            >
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAME"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/Name"
-            android:paddingTop="10dp"
-            android:textSize="20sp"
-            android:textAlignment="center"
+            android:paddingTop="5dp"
+            android:textSize="25sp"
+            android:textColor="#000000"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RATING"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/Rating"
-            android:paddingTop="10dp"
-            android:textSize="20sp"
-            android:textAlignment="center"
+            android:paddingTop="5dp"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PRICE"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/Price"
-            android:paddingTop="10dp"
-            android:textSize="20sp"
-            android:textAlignment="center"
+            android:paddingTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"/>
+           </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
 
 
 
