@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,12 +42,12 @@ public class LoginActivity extends AppCompatActivity {
                 String password1=password.getText().toString();
                 String roomkey = roomKey.getText().toString();
                 final String team_name = team.getText().toString();
-
+                Log.e("NavDrawer", email1 +" " + password1);
                 mAuth.createUserWithEmailAndPassword(email1,password1).addOnCompleteListener(
                         new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                FirebaseUser user=mAuth.getCurrentUser();
+                                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                                 UserProfileChangeRequest userProfileChangeRequest=new UserProfileChangeRequest.Builder()
                                         .setDisplayName(team_name).build();
 
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                                 });
                             }
                         }
+
                 );
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
