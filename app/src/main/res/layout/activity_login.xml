@@ -7,9 +7,26 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp" />
 
     <EditText
         android:id="@+id/login_roomkey"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/team_name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp" />

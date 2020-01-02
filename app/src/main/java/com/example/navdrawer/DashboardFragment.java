@@ -49,7 +49,6 @@ public class DashboardFragment extends Fragment {
 
         String roomkey = getActivity().getIntent().getStringExtra("RoomKey");
 
-
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child(roomkey);
         reference.addValueEventListener(
                 new ValueEventListener() {

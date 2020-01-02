@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lv_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="8">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/lv_player_face"
+        android:layout_width="90dp"
+        android:layout_height="77dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_face_black_24dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <LinearLayout
+        android:layout_width="244dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/lv_player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingStart="16dp"
+            android:text="Player name:"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/lv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingStart="16dp"
+            android:text="Price: "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingStart="16dp"
+            android:text="Type: "
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp">
+
+        <TextView
+            android:id="@+id/lv_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Rating:"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+</LinearLayout>
