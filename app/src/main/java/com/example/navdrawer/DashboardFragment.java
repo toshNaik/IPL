@@ -71,14 +71,14 @@ public class DashboardFragment extends Fragment {
         String[] displayName = current_user.getDisplayName().split(" ");
         Log.d("NavDrawer", displayName[0] + displayName[1]);
         //displayName contains the room number and team name at positions 0 and 1
-/*        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference(displayName[0]).child(displayName[1]).child("Budget");
-        reference.addValueEventListener(
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference(displayName[0]).child(displayName[1]).child("Budget");
+        reference2.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Integer budget = dataSnapshot.getValue(Integer.class);
                         Log.d("NavDrawer", budget.toString());
-                        Budget.setText(budget);
+                        Budget.setText(Integer.toString(budget));
                     }
 
                     @Override
@@ -86,7 +86,7 @@ public class DashboardFragment extends Fragment {
 
                     }
                 }
-        );*/
+        );
 
         return view;
     }

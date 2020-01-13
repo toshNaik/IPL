@@ -71,7 +71,7 @@ public class Admin extends AppCompatActivity {
                         radioButton = findViewById(radioId);
                         assign = radioButton.getText().toString();
                         assign_player();
-                        //change_budget();
+                        change_budget();
                     }
                 }
         );
@@ -97,8 +97,8 @@ public class Admin extends AppCompatActivity {
 
         if(player_price.getText() != null)
             d = Integer.parseInt(player_price.getText().toString());
-
-        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Teams").child(assign).child("Budget");
+        Log.d("NavDrawer", Integer.toString(d));
+        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference(room).child(assign).child("Budget");
         databaseReference.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
