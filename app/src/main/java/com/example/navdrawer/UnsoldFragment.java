@@ -59,7 +59,7 @@ public class UnsoldFragment extends Fragment {
         String[] displayName = current_user.getDisplayName().split(" ");
         Log.d("NavDrawer", displayName[0] + displayName[1]);
         //displayName contains the room number and team name at positions 0 and 1
-        databaseReference = FirebaseDatabase.getInstance().getReference(displayName[0]).child("Unsold");
+        databaseReference = FirebaseDatabase.getInstance().getReference(displayName[0]).child("Unsold").child("Players");
         databaseReference.addValueEventListener(
                 new ValueEventListener() {
                     @Override

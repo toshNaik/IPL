@@ -33,6 +33,7 @@ public class Admin extends AppCompatActivity {
     private RadioButton radioButton;
     private int budget,final_price,d;
     String assign;
+    String room;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class Admin extends AppCompatActivity {
         radioGroup=findViewById(R.id.radio_group);
         team_budget =findViewById(R.id.team_budget);
         player_price =findViewById(R.id.player_price);
+
+        room="room1";
 
 
         change_btn.setOnClickListener(
@@ -68,7 +71,7 @@ public class Admin extends AppCompatActivity {
                         radioButton = findViewById(radioId);
                         assign = radioButton.getText().toString();
                         assign_player();
-                        change_budget();
+                        //change_budget();
                     }
                 }
         );
@@ -115,7 +118,7 @@ public class Admin extends AppCompatActivity {
     }
 
     private void assign_player() {
-        final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Teams").child(assign);
+        final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference(room).child(assign);
         DatabaseReference databaseReference3 = FirebaseDatabase.getInstance().getReference("Players").child(Integer.toString(key));
         databaseReference3.addValueEventListener(
                 new ValueEventListener() {
