@@ -2,6 +2,7 @@ package com.example.navdrawer;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,7 +55,11 @@ public class UnsoldFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         progressDialog.show();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Unsold Players");
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String[] displayName = current_user.getDisplayName().split(" ");
+        Log.d("NavDrawer", displayName[0] + displayName[1]);
+        //displayName contains the room number and team name at positions 0 and 1
+        databaseReference = FirebaseDatabase.getInstance().getReference(displayName[0]).child("Unsold");
         databaseReference.addValueEventListener(
                 new ValueEventListener() {
                     @Override

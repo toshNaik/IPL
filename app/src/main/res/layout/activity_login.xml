@@ -9,24 +9,35 @@
 
     <EditText
         android:id="@+id/login_email"
+        android:hint="Email"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp" />
 
     <EditText
         android:id="@+id/login_password"
+        android:hint="Password"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp" />
 
     <EditText
         android:id="@+id/login_roomkey"
+        android:hint="Roomkey"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp" />
 
+   <EditText
+       android:id="@+id/login_roomno"
+       android:hint="Room number"
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       android:layout_marginTop="20dp" />
+
     <EditText
         android:id="@+id/team_name"
+        android:hint="Team Name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp" />

@@ -2,6 +2,7 @@ package com.example.navdrawer;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,9 +56,10 @@ public class AvailableFragment extends Fragment {
         progressDialog.show();
 
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        String name1=firebaseUser.getDisplayName();
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Teams").child(name1).child("Players");
+        String[] displayName = firebaseUser.getDisplayName().split(" ");
+        Log.d("NavDrawer", displayName[0] + displayName[1]);
+        //displayName contains the room number and team name at positions 0 and 1
+        databaseReference = FirebaseDatabase.getInstance().getReference(displayName[0]).child(displayName[1]).child("Players");
         databaseReference.addValueEventListener(
                 new ValueEventListener() {
                     @Override
