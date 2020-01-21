@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 String email1=email.getText().toString();
                 String password1=password.getText().toString();
-                String roomkey = roomKey.getText().toString();
+                final String roomkey = roomKey.getText().toString();
                 final String team_name = team.getText().toString();
                 final String room_no = roomNumber.getText().toString();
                 Log.e("NavDrawer", email1 +" " + password1);
@@ -49,26 +49,27 @@ public class LoginActivity extends AppCompatActivity {
                         new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-                                UserProfileChangeRequest userProfileChangeRequest=new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(room_no + " " + team_name).build();
-
-                                user.updateProfile(userProfileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(LoginActivity.this, "Profile updated", Toast.LENGTH_LONG).show();
+                                Log.e("NavDrawer", "Inside createUser block");
+                                if(task.isSuccessful()) {
+                                    FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                                    UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(room_no + " " + team_name).build();
+                                    user.updateProfile(userProfileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(LoginActivity.this, "Profile updated", Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                intent.putExtra("RoomKey", roomkey);
+                                                startActivity(intent);
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         }
 
                 );
-
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("RoomKey", roomkey);
-                startActivity(intent);
 
             }
         });
