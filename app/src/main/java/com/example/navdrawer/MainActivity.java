@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.players:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlayersFragment()).commit();
                 break;
-            case R.id.logout:
-                //TODO: add logout action here
+            case R.id.teams:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TeamsFragment()).commit();
+                break;
         }
         return true;
     }

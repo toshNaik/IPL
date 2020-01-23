@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lv_team_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="10">
+
+
+    <TextView
+        android:id="@+id/lv_team_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_weight="5"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Team"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+
+    <TextView
+        android:id="@+id/lv_team_budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_weight="5"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Budget"
+        android:textAlignment="viewEnd"
+        android:textColor="#000"
+        android:textSize="30sp" />
+</LinearLayout>
