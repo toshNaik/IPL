@@ -28,7 +28,7 @@ public class Admin extends AppCompatActivity {
 
     EditText keys, team_budget, player_price, roomkey;
     public int key;
-    private Button change_btn, apply_btn;
+    private Button change_btn, apply_btn, change_reference;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private int budget,final_price,d;
@@ -46,8 +46,22 @@ public class Admin extends AppCompatActivity {
         radioGroup=findViewById(R.id.radio_group);
         team_budget =findViewById(R.id.team_budget);
         player_price =findViewById(R.id.player_price);
+        change_reference = findViewById(R.id.change_reference);
 
         room="room1";
+
+        change_reference.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Reference");
+
+                        databaseReference.setValue(1);
+
+                    }
+                }
+        );
+
 
 
         change_btn.setOnClickListener(
