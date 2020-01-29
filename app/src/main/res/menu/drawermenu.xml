@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_dashboard_black_24dp"/>
     <item
         android:id="@+id/players"
-        android:title="Players"
+        android:title="All Players"
         android:icon="@drawable/ic_search_black_24dp"
         />
     <item
@@ -14,7 +14,7 @@
         android:title="Unsold" />
     <item
         android:id="@+id/available"
-        android:title="Available" />
+        android:title="Bought Players" />
     <item
         android:id="@+id/teams"
         android:title="Teams"
