@@ -25,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+interface MyCallback{
+    void onDataGot();
+}
 public class DashboardFragment extends Fragment {
 
     int key=1;
@@ -32,6 +35,7 @@ public class DashboardFragment extends Fragment {
     private AnimationDrawable animationDrawable;
     ImageView playerback;
     private LinearLayout linearLayout;
+
 
     @Nullable
     @Override
@@ -57,8 +61,8 @@ public class DashboardFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         key=dataSnapshot.getValue(Integer.class);
-                        //ID.setText(Integer.toString(key));
-                        display(key);
+                        Log.d("NavDrawer", "Called display function");
+                        display(key, Mycallback callback);
                     }
 
                     @Override
@@ -67,8 +71,9 @@ public class DashboardFragment extends Fragment {
                     }
                 }
         );
+        Log.d("NavDrawer", "Exited display");
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-        String[] displayName = current_user.getDisplayName().split(" ");
+        String[] displayName = /*{"room1", "CSK"};*/current_user.getDisplayName().split(" ");
         Log.d("NavDrawer", displayName[0] + displayName[1]);
         //displayName contains the room number and team name at positions 0 and 1
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference(displayName[0]).child(displayName[1]).child("Budget");
@@ -91,12 +96,47 @@ public class DashboardFragment extends Fragment {
         return view;
     }
 
-    private void display(int key1) {
-        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Players").child(Integer.toString(key1));
+    private void display(int key1, MyCallback callback) {
+
+        final int key2=key1;
+        Log.d("NavDrawer", "Entered display function");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Reference");
+        reference.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int Reference = dataSnapshot.getValue(Integer.class);
+                        Log.d("NavDrawer", String.valueOf(Reference));
+                        if (Reference==0)
+                        {    Log.d("NavDrawer", "Called display PLayers"); displayPlayers(key2);}
+
+                        else
+                        { Log.d("NavDrawer", "Called display unsold");   displayUnsold(key2);}
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );
+
+    }
+
+    private void displayUnsold(int key2) {
+        Toast.makeText(getActivity(),"key is : "+key2,Toast.LENGTH_LONG).show();
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String[] displayName = /*{"room1", "CSK"};*/current_user.getDisplayName().split(" ");
+        Log.d("NavDrawer", displayName[0] + displayName[1]);
+
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference(displayName[0]).child("Unsold").child(Integer.toString(key2));
         databaseReference.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        if(getActivity() == null)
+                            return;
                         Player player_class = dataSnapshot.getValue(Player.class);
                         Name.setText(player_class.getName());
                         Price.setText(Integer.toString(player_class.getPrice()));
@@ -111,5 +151,31 @@ public class DashboardFragment extends Fragment {
                     }
                 }
         );
+    }
+
+    public void displayPlayers(int key2) {
+        Log.d("NavDrawer", "Entered displayPlayers function");
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Players").child(Integer.toString(key2));
+        databaseReference.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(getActivity() == null)
+                            return;
+                        Player player_class = dataSnapshot.getValue(Player.class);
+                        Name.setText(player_class.getName());
+                        Price.setText(Integer.toString(player_class.getPrice()));
+                        Rating.setText(Integer.toString(player_class.getRating()));
+                        Glide.with(getContext()).load(player_class.getImageUri()).circleCrop().into(playerback);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );
+
     }
 }

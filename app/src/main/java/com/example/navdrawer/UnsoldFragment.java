@@ -34,6 +34,7 @@ public class UnsoldFragment extends Fragment {
     private row_adapter adapter;
     List<Integer> integers;
     DatabaseReference reference;
+    String[] references = {"Unsold" , "Unsold2"};
 
     @Nullable
     @Override
@@ -42,11 +43,33 @@ public class UnsoldFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerView_players);
 
+        reference = FirebaseDatabase.getInstance().getReference("Reference");
+        reference.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int Reference = dataSnapshot.getValue(Integer.class);
+
+                        display(references[Reference]);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );
+
+
+        return view;
+    }
+
+    private void display(String reference) {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         //Toast.makeText(this, "hello", Toast.LENGTH_LONG).show();
 
-        progressDialog = new ProgressDialog(getContext());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading Products");
 
         list = new ArrayList<>();
@@ -59,7 +82,7 @@ public class UnsoldFragment extends Fragment {
         String[] displayName = current_user.getDisplayName().split(" ");
         Log.d("NavDrawer", displayName[0] + displayName[1]);
         //displayName contains the room number and team name at positions 0 and 1
-        databaseReference = FirebaseDatabase.getInstance().getReference(displayName[0]).child("Unsold").child("Players");
+        databaseReference = FirebaseDatabase.getInstance().getReference(displayName[0]).child(reference).child("Players");
         databaseReference.addValueEventListener(
                 new ValueEventListener() {
                     @Override
@@ -80,6 +103,6 @@ public class UnsoldFragment extends Fragment {
                 }
         );
 
-        return view;
+
     }
 }

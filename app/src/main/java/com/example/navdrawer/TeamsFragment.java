@@ -43,6 +43,8 @@ public class TeamsFragment extends Fragment {
         String[] displayName = current_user.getDisplayName().split(" ");
         Log.d("NavDrawer", displayName[0]);
 
+
+
         Query query = FirebaseDatabase.getInstance().getReference().child(displayName[0]);
         listView = view.findViewById(R.id.listview_teams);
         FirebaseListOptions<Team> options =  new FirebaseListOptions.Builder<Team>()
@@ -65,6 +67,7 @@ public class TeamsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
+                //intent.putExtra("Team",)
                 startActivity(intent);
             }
         });

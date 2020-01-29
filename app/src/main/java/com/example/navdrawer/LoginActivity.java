@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(LoginActivity.this, "Profile updated", Toast.LENGTH_LONG).show();
+                                                //Toast.makeText(LoginActivity.this, "Profile updated", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 intent.putExtra("RoomKey", roomkey);
                                                 startActivity(intent);
