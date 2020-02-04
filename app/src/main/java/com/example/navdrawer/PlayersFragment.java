@@ -1,11 +1,13 @@
 package com.example.navdrawer;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,7 +37,8 @@ public class PlayersFragment extends Fragment {
     View view;
     DatabaseReference reference;
     String[] displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().split(" ");
-
+    private AnimationDrawable animationDrawable;
+    private LinearLayout linearLayout;
 
     @Nullable
     @Override

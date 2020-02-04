@@ -7,6 +7,7 @@
     android:weightSum="8">
 
 
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/lv_player_face"
         android:layout_width="90dp"
@@ -68,5 +69,6 @@
             android:textColor="#000"
             android:textSize="30sp" />
     </RelativeLayout>
+
 
 </LinearLayout>

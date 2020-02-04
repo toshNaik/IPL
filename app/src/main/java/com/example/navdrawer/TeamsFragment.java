@@ -1,6 +1,7 @@
 package com.example.navdrawer;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,16 +35,20 @@ public class TeamsFragment extends Fragment {
     FirebaseListAdapter adapter;
     ListView listView;
     View view;
-
+    private AnimationDrawable animationDrawable;
+    private LinearLayout linearLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_teams, container, false);
-
+        linearLayout = view.findViewById(R.id.linearlayoutteams);
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String[] displayName = current_user.getDisplayName().split(" ");
         Log.d("NavDrawer", displayName[0]);
-
+        animationDrawable = (AnimationDrawable)linearLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
 
 
         Query query = FirebaseDatabase.getInstance().getReference().child(displayName[0]);
