@@ -66,8 +66,10 @@ public class TeamsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                //intent.putExtra("Team",)
+                TextView teamClickedOn = view.findViewById(R.id.lv_team_name);
+                String teamName = teamClickedOn.getText().toString();
+                Intent intent = new Intent(getActivity(), Team_details.class);
+                intent.putExtra("Team Name",teamName);
                 startActivity(intent);
             }
         });

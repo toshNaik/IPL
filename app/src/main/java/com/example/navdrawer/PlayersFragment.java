@@ -41,18 +41,19 @@ public class PlayersFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_players, container, false);
-
+        Log.d("Players", "ENtereed");
 
         reference = FirebaseDatabase.getInstance().getReference().child("Reference");
         reference.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Log.d("NavDrawer", "Entered datasnapshot");
+                        Log.d("Players", "Entered datasnapshot");
                         int refer = dataSnapshot.getValue(Integer.class);
+                        Log.d("Players", String.valueOf(refer));
 
                         if (refer == 0 || refer == 1){
-                            Log.d("NavDrawer", "Entered datasnapshot if");
+                            Log.d("PLayers", "About to call display_players");
                             display_players(refer);
                         }
                     }
@@ -69,7 +70,7 @@ public class PlayersFragment extends Fragment {
 
     private void display_players(int refer) {
         Query query = null;
-
+        Log.d("Players", "ENtereed display players");
         if (refer == 0) {
             Log.d("NavDrawer", "Entered here");
             query = FirebaseDatabase.getInstance().getReference().child("Players");
@@ -107,6 +108,7 @@ public class PlayersFragment extends Fragment {
                     type.setText(player.getType());
                 }
             };
+            adapter.startListening();
             listView.setAdapter(adapter);
         }
 
@@ -115,7 +117,7 @@ public class PlayersFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        adapter.startListening();
+
     }
 
     @Override
